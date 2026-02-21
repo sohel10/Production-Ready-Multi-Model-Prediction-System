@@ -79,14 +79,21 @@ The inference server **never guesses feature order**.
 Feature reconstruction is fully deterministic.
 
 ---
+
+
 ## 🎬 Live Demo
 
 <p align="center">
-  <img src="Animation.gif" alt="Clinical RAG Assistant Demo" width="850"/>
+  <img src="reports/figures/Ani1.gif" width="850"/>
 </p>
 
-> This repository focuses on **data ingestion, chunking, and embeddings**.
-## Key Design Principles
+> Interactive FastAPI-powered UI demonstrating real-time residual value prediction.
+
+---
+
+## 🧠 Key Design Principles
+
+
 
 - Segment-aware modeling
 - Explicit schema persistence
