@@ -223,7 +223,7 @@ This provides forward-looking insight into depreciation dynamics.
 
 Top features driving regression predictions:
 
-![Feature Importance](reports/xgb_feature_importance.png)
+![Feature Importance](reports/figures/xgb_feature_importance.png)
 
 > Feature importance reflects global model contribution and does not imply causality.
 
@@ -272,57 +272,47 @@ This repository uses **GitHub Actions** to automate quality checks.
 
 ### High-Level Flow
 
-Production-Ready-Multi-Model-Prediction-System/
-│
-├── .github/
-│   └── workflows/
-│       └── ci.yml
-│
-├── data/
-│   ├── raw/
-│   └── processed/
-│
-├── logs/
-│
-├── mlruns/                    # MLflow experiment tracking
-│
-├── models/
-│   ├── ev_segment_model.pkl
-│   ├── luxury_segment_model.pkl
-│   ├── sedan_segment_model.pkl
-│   ├── suv_segment_model.pkl
-│   ├── truck_segment_model.pkl
-│   ├── *_features.json
-│
-├── notebooks/
-│   └── 01_EDA.ipynb
-│
-├── reports/
-│   └── figures/
-│       ├── model_performance.png
-│       ├── rv_distribution.png
-│       ├── market_weekly_forecast.png
-│       ├── *_depreciation.png
-│       └── xgb_feature_importance.png
+```text
+Raw Data
+   ↓
+Preprocessing
+   ↓
+Feature Engineering
+   ↓
+One-Hot Encoding
+   ↓
+Feature Schema Saved (JSON)
+   ↓
+Segment-Specific XGBoost Training
+   ↓
+Model Artifacts Saved (.pkl)
+   ↓
+FastAPI Inference Layer
+   ↓
+Web UI
+
+## Project Structure
+auto-valuation/
 │
 ├── src/
-│   ├── api.py
 │   ├── preprocessing.py
-│   ├── feature_engineering.py
 │   ├── residual_model.py
 │   ├── train_time_model.py
-│   ├── time_series.py
-│   ├── xgb_time_series.py
-│   ├── evaluate.py
-│   └── config.py
+│   ├── config.py
+│   └── api.py
 │
-├── static/
-│   └── style.css
+├── models/
+│   ├── *_segment_model.pkl
+│   ├── *_features.json
+│   └── market_time_model.pkl
 │
 ├── templates/
 │   └── index.html
 │
-├── .gitignore
+├── static/
+│   └── style.css
+│
+├── reports/
 ├── Dockerfile
 ├── requirements.txt
 └── README.md
