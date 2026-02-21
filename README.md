@@ -268,55 +268,61 @@ This repository uses **GitHub Actions** to automate quality checks.
 - API startup verification  
 - Inference sanity checks  
 
-This ensures:
 
-- Broken code is caught early  
-- API behavior remains stable  
-- Model inference does not silently regress  
 
 ### High-Level Flow
 
-```text
-Raw Data
-   ↓
-Preprocessing
-   ↓
-Feature Engineering
-   ↓
-One-Hot Encoding
-   ↓
-Feature Schema Saved (JSON)
-   ↓
-Segment-Specific XGBoost Training
-   ↓
-Model Artifacts Saved (.pkl)
-   ↓
-FastAPI Inference Layer
-   ↓
-Web UI
-
-## Project Structure
-auto-valuation/
+Production-Ready-Multi-Model-Prediction-System/
 │
-├── src/
-│   ├── preprocessing.py
-│   ├── residual_model.py
-│   ├── train_time_model.py
-│   ├── config.py
-│   └── api.py
+├── .github/
+│   └── workflows/
+│       └── ci.yml
+│
+├── data/
+│   ├── raw/
+│   └── processed/
+│
+├── logs/
+│
+├── mlruns/                    # MLflow experiment tracking
 │
 ├── models/
-│   ├── *_segment_model.pkl
+│   ├── ev_segment_model.pkl
+│   ├── luxury_segment_model.pkl
+│   ├── sedan_segment_model.pkl
+│   ├── suv_segment_model.pkl
+│   ├── truck_segment_model.pkl
 │   ├── *_features.json
-│   └── market_time_model.pkl
 │
-├── templates/
-│   └── index.html
+├── notebooks/
+│   └── 01_EDA.ipynb
+│
+├── reports/
+│   └── figures/
+│       ├── model_performance.png
+│       ├── rv_distribution.png
+│       ├── market_weekly_forecast.png
+│       ├── *_depreciation.png
+│       └── xgb_feature_importance.png
+│
+├── src/
+│   ├── api.py
+│   ├── preprocessing.py
+│   ├── feature_engineering.py
+│   ├── residual_model.py
+│   ├── train_time_model.py
+│   ├── time_series.py
+│   ├── xgb_time_series.py
+│   ├── evaluate.py
+│   └── config.py
 │
 ├── static/
 │   └── style.css
 │
-├── reports/
+├── templates/
+│   └── index.html
+│
+├── .gitignore
 ├── Dockerfile
 ├── requirements.txt
 └── README.md
