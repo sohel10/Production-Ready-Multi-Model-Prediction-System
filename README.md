@@ -23,8 +23,19 @@ Instead of training a single monolithic model, this system:
 - Containerizes the API layer  
 
 This architecture reflects how **real-world valuation systems** are deployed in automotive analytics environments.
+## 🧰 Tech Stack
 
----
+[![Python 3.10](https://img.shields.io/badge/Python-3.10-blue)](https://www.python.org/downloads/release/python-3100/)
+[![PySpark](https://img.shields.io/badge/PySpark-3.x-orange)](https://spark.apache.org/docs/latest/api/python/)
+[![XGBoost](https://img.shields.io/badge/XGBoost-1.7+-green)](https://xgboost.readthedocs.io/)
+[![scikit-learn](https://img.shields.io/badge/scikit--learn-1.3+-F7931E)](https://scikit-learn.org/)
+[![MLflow](https://img.shields.io/badge/MLflow-Tracking-0194E2)](https://mlflow.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-Production-009688)](https://fastapi.tiangolo.com/)
+[![Streamlit](https://img.shields.io/badge/Streamlit-Demo-FF4B4B)](https://streamlit.io/)
+[![Docker](https://img.shields.io/badge/Docker-Containerized-2496ED)](https://www.docker.com/)
+[![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-CI/CD-2088FF)](https://github.com/features/actions)
+[![Ubuntu](https://img.shields.io/badge/OS-Ubuntu-FCC624)](https://ubuntu.com/)
+[![Parquet](https://img.shields.io/badge/Storage-Parquet-4B8BBE)](https://parquet.apache.org/)
 
 ## Business Objective
 
@@ -65,7 +76,13 @@ The inference server **never guesses feature order**.
 Feature reconstruction is fully deterministic.
 
 ---
+## 🎬 Live Demo
 
+<p align="center">
+  <img src="Animation.gif" alt="Clinical RAG Assistant Demo" width="850"/>
+</p>
+
+> This repository focuses on **data ingestion, chunking, and embeddings**.
 ## Key Design Principles
 
 - Segment-aware modeling
@@ -137,6 +154,12 @@ auto-valuation/
 
 ---
 
+
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+![Python Version](https://img.shields.io/badge/python-3.10+-blue.svg)
+![Built with](https://img.shields.io/badge/Built%20with-Apache%20Spark%20%7C%20PyTorch%20%7C%20FAISS-brightgreen)
+![Architecture](https://img.shields.io/badge/Architecture-Retrieval--First-blue)
+![Status](https://img.shields.io/badge/status-production--style-success)
 ## 🚀 What This System Demonstrates
 
 - Multi-segment ML modeling (SUV, Sedan, Truck, Luxury, EV)
@@ -185,43 +208,71 @@ This system instead:
 
 The inference server **never guesses feature order**.
 
+
+## 📊 Model Performance & Interpretability
+
+### ROC Curve
+The ROC curve below shows the model’s ability to discriminate between high and low TMB samples on held-out data.
+
+![ROC Curve](images/roc_curve.png)
+
 ---
 
-# 🏗️ Architecture Overview
+### Feature Importance
+Top features driving the model’s predictions (XGBoost gain-based importance):
 
-```text
-                   ┌────────────────────────────┐
-                   │      Raw Vehicle Data      │
-                   └─────────────┬──────────────┘
-                                 │
-                                 ▼
-                    ┌──────────────────────────┐
-                    │  Preprocessing Layer     │
-                    │  • Cleaning              │
-                    │  • Feature engineering   │
-                    └─────────────┬────────────┘
-                                 │
-                                 ▼
-                ┌────────────────────────────────┐
-                │ One-Hot Encoding + Schema Save │
-                │ (Persisted JSON feature list)  │
-                └─────────────┬──────────────────┘
-                                 │
-                                 ▼
-                ┌────────────────────────────────┐
-                │ Segment-Specific XGBoost Model │
-                └─────────────┬──────────────────┘
-                                 │
-                                 ▼
-                ┌────────────────────────────────┐
-                │ FastAPI Inference Server       │
-                │ Deterministic Reconstruction   │
-                └─────────────┬──────────────────┘
-                                 │
-                                 ▼
-                          ┌─────────────┐
-                          │   Web UI    │
-                          └─────────────┘
+![Feature Importance](images/feature_importance.png)
 
+> Note: Feature importance reflects global model behavior and does not imply causal relationships.
 
-                    
+---
+
+## ⚙️ MLOps
+
+This project follows **production-oriented MLOps practices** to ensure reproducible training, reliable inference, and safe deployment of machine-learning models.
+
+---
+
+### 🔌 Inference API (FastAPI)
+
+A **production-ready inference service** is implemented using **FastAPI**, exposing model predictions via REST endpoints.
+
+#### Available Endpoints
+
+| Endpoint | Method | Description |
+|--------|--------|-------------|
+| `/health` | GET | Service health check |
+| `/predict` | POST | Predict High TMB probability for a single tumor sample |
+
+The API enforces:
+- Strict input schema validation  
+- Consistent preprocessing aligned with training  
+- Deterministic, stateless inference  
+
+---
+
+### 🧪 CI/CD (GitHub Actions)
+
+This repository uses **GitHub Actions** to automate quality checks on every commit.
+
+**CI pipeline includes:**
+- Python environment setup  
+- Dependency installation  
+- Import and API startup validation  
+- Inference sanity checks  
+
+This ensures:
+- Broken code is caught early  
+- API behavior remains stable  
+- Model inference does not silently regress  
+
+---
+
+### 🚀 Model Serving
+
+The FastAPI service can be launched locally or deployed in a containerized environment.
+
+```bash
+uvicorn app.main:app --reload
+
+uvicorn app.main:app --reload
