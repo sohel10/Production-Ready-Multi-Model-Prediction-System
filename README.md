@@ -99,52 +99,7 @@ Feature reconstruction is fully deterministic.
 
 ## System Architecture
 
-### High-Level Flow
 
-```text
-Raw Data
-   ↓
-Preprocessing
-   ↓
-Feature Engineering
-   ↓
-One-Hot Encoding
-   ↓
-Feature Schema Saved (JSON)
-   ↓
-Segment-Specific XGBoost Training
-   ↓
-Model Artifacts Saved (.pkl)
-   ↓
-FastAPI Inference Layer
-   ↓
-Web UI
-
-## Project Structure
-auto-valuation/
-│
-├── src/
-│   ├── preprocessing.py
-│   ├── residual_model.py
-│   ├── train_time_model.py
-│   ├── config.py
-│   └── api.py
-│
-├── models/
-│   ├── *_segment_model.pkl
-│   ├── *_features.json
-│   └── market_time_model.pkl
-│
-├── templates/
-│   └── index.html
-│
-├── static/
-│   └── style.css
-│
-├── reports/
-├── Dockerfile
-├── requirements.txt
-└── README.md
 
 # 🚗 Auto Residual Value Predictor  
 ### Production-Grade Multi-Segment Vehicle Valuation System
@@ -200,63 +155,171 @@ The inference server **never guesses feature order**.
 
 
 ## 📊 Model Performance & Interpretability
+# 📊 Model Evaluation & Diagnostics
 
-### ROC Curve
-The ROC curve below shows the model’s ability to discriminate between high and low TMB samples on held-out data.
-
-![ROC Curve](images/roc_curve.png)
+This project solves a **regression problem** (Residual Value % prediction), therefore performance is evaluated using regression metrics and visual diagnostics — not ROC curves.
 
 ---
 
-### Feature Importance
-Top features driving the model’s predictions (XGBoost gain-based importance):
+## 📈 Model Performance (Regression Metrics)
 
-![Feature Importance](images/feature_importance.png)
+The model is evaluated using:
 
-> Note: Feature importance reflects global model behavior and does not imply causal relationships.
+- RMSE (Root Mean Squared Error)
+- Segment-level performance comparison
+- Out-of-sample validation
+
+![Model Performance](reports/figures/model_performance.png)
+
+> Lower RMSE indicates better predictive accuracy.
 
 ---
 
-## ⚙️ MLOps
+## 📉 Residual Value Distribution
 
-This project follows **production-oriented MLOps practices** to ensure reproducible training, reliable inference, and safe deployment of machine-learning models.
+Distribution of predicted residual values across vehicle segments:
+
+![Residual Value Distribution](reports/figures/rv_distribution.png)
+
+This visualization helps assess prediction spread and detect skewness or instability.
 
 ---
 
-### 🔌 Inference API (FastAPI)
+## 📊 Weekly Market Forecast (Time-Series Extension)
 
-A **production-ready inference service** is implemented using **FastAPI**, exposing model predictions via REST endpoints.
+Short-term forecast of market-level residual value trends using time-series modeling.
 
-#### Available Endpoints
+![Market Weekly Forecast](reports/figures/market_weekly_forecast.png)
+
+This provides forward-looking insight into depreciation dynamics.
+
+---
+
+## 🚗 Segment-Level Depreciation Curves
+
+### SUV Depreciation
+
+![SUV Depreciation](reports/figures/suv_depreciation.png)
+
+### Sedan Depreciation
+
+![Sedan Depreciation](reports/figures/sedan_depreciation.png)
+
+### Truck Depreciation
+
+![Truck Depreciation](reports/figures/truck_depreciation.png)
+
+### Luxury Depreciation
+
+![Luxury Depreciation](reports/figures/luxury_depreciation.png)
+
+### EV Depreciation
+
+![EV Depreciation](reports/figures/ev_depreciation.png)
+
+---
+
+## 🔎 Feature Importance (XGBoost Gain-Based)
+
+Top features driving regression predictions:
+
+![Feature Importance](reports/figures/xgb_feature_importance.png)
+
+> Feature importance reflects global model contribution and does not imply causality.
+
+---
+
+# ⚙️ MLOps & Production Engineering
+
+This project follows **production-oriented ML system design** to ensure reproducibility, reliability, and safe deployment.
+
+---
+
+## 🔌 Inference API (FastAPI)
+
+A production-ready inference service is implemented using **FastAPI**, exposing model predictions via REST endpoints.
+
+### Available Endpoints
 
 | Endpoint | Method | Description |
-|--------|--------|-------------|
+|----------|--------|------------|
 | `/health` | GET | Service health check |
-| `/predict` | POST | Predict High TMB probability for a single tumor sample |
+| `/predict` | POST | Predict residual value percentage for a vehicle |
 
 The API enforces:
+
 - Strict input schema validation  
-- Consistent preprocessing aligned with training  
-- Deterministic, stateless inference  
+- Deterministic feature reconstruction  
+- Alignment with training feature schema  
+- Stateless inference  
+- Safe error handling  
 
 ---
 
-### 🧪 CI/CD (GitHub Actions)
+## 🧪 CI/CD (GitHub Actions)
 
-This repository uses **GitHub Actions** to automate quality checks on every commit.
+This repository uses **GitHub Actions** to automate quality checks.
 
-**CI pipeline includes:**
+### CI Pipeline Includes:
+
 - Python environment setup  
 - Dependency installation  
-- Import and API startup validation  
+- Model import validation  
+- API startup verification  
 - Inference sanity checks  
 
 This ensures:
+
 - Broken code is caught early  
 - API behavior remains stable  
 - Model inference does not silently regress  
 
----
+### High-Level Flow
+
+```text
+Raw Data
+   ↓
+Preprocessing
+   ↓
+Feature Engineering
+   ↓
+One-Hot Encoding
+   ↓
+Feature Schema Saved (JSON)
+   ↓
+Segment-Specific XGBoost Training
+   ↓
+Model Artifacts Saved (.pkl)
+   ↓
+FastAPI Inference Layer
+   ↓
+Web UI
+
+## Project Structure
+auto-valuation/
+│
+├── src/
+│   ├── preprocessing.py
+│   ├── residual_model.py
+│   ├── train_time_model.py
+│   ├── config.py
+│   └── api.py
+│
+├── models/
+│   ├── *_segment_model.pkl
+│   ├── *_features.json
+│   └── market_time_model.pkl
+│
+├── templates/
+│   └── index.html
+│
+├── static/
+│   └── style.css
+│
+├── reports/
+├── Dockerfile
+├── requirements.txt
+└── README.md
 
 ### 🚀 Model Serving
 
