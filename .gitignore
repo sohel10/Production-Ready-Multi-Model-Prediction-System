@@ -11,9 +11,8 @@ __pycache__/
 venv/
 env/
 .venv/
-auto-valuation/
 ENV/
-.env/
+.env
 
 # ==========================
 # Jupyter
@@ -27,31 +26,28 @@ logs/
 *.log
 
 # ==========================
-# Model Artifacts (Optional - see note below)
+# MLflow
+# ==========================
+mlruns/
+mlflow.db
+
+# ==========================
+# Data
+# ==========================
+data/
+*.csv
+*.parquet
+
+# ==========================
+# Model Artifacts (optional)
 # ==========================
 models/*.pkl
 models/*.joblib
 models/*.h5
 models/*.pt
 
-# If you want to ignore feature JSON:
-# models/*.json
-
 # ==========================
-# MLflow (if used later)
-# ==========================
-mlruns/
-
-# ==========================
-# Data
-# ==========================
-data/raw/
-data/processed/
-*.csv
-*.parquet
-
-# ==========================
-# OS Files
+# OS
 # ==========================
 .DS_Store
 Thumbs.db
@@ -62,19 +58,8 @@ Thumbs.db
 .vscode/
 
 # ==========================
-# Pytest / Coverage
-# ==========================
-.coverage
-htmlcov/
-
-# ==========================
 # Build
 # ==========================
 build/
 dist/
 *.egg-info/
-
-# ==========================
-# Docker
-# ==========================
-*.tar
