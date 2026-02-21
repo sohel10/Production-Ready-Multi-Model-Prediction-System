@@ -223,7 +223,7 @@ This provides forward-looking insight into depreciation dynamics.
 
 Top features driving regression predictions:
 
-![Feature Importance](reports/figures/xgb_feature_importance.png)
+![Feature Importance](reports/xgb_feature_importance.png)
 
 > Feature importance reflects global model contribution and does not imply causality.
 
