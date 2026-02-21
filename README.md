@@ -42,16 +42,6 @@ This architecture reflects how **real-world valuation systems** are deployed in 
 [![Deployment](https://img.shields.io/badge/Deployment-Dockerized-success)]()
 [![Status](https://img.shields.io/badge/status-production--style-success)]()
 
----
-
-
-[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-![Python Version](https://img.shields.io/badge/python-3.10+-blue.svg)
-![Built with](https://img.shields.io/badge/Built%20with-Apache%20Spark%20%7C%20PyTorch%20%7C%20FAISS-brightgreen)
-![Architecture](https://img.shields.io/badge/Architecture-Retrieval--First-blue)
-![Status](https://img.shields.io/badge/status-production--style-success)
-## Business Objective
-
 Predict **Residual Value Percentage (RV%)** of used vehicles using:
 
 - Vehicle Age  
