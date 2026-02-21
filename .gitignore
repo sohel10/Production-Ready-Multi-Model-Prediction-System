@@ -1,0 +1,80 @@
+# ==========================
+# Python
+# ==========================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# Virtual Environments
+venv/
+env/
+.venv/
+auto-valuation/
+ENV/
+.env/
+
+# ==========================
+# Jupyter
+# ==========================
+.ipynb_checkpoints/
+
+# ==========================
+# Logs
+# ==========================
+logs/
+*.log
+
+# ==========================
+# Model Artifacts (Optional - see note below)
+# ==========================
+models/*.pkl
+models/*.joblib
+models/*.h5
+models/*.pt
+
+# If you want to ignore feature JSON:
+# models/*.json
+
+# ==========================
+# MLflow (if used later)
+# ==========================
+mlruns/
+
+# ==========================
+# Data
+# ==========================
+data/raw/
+data/processed/
+*.csv
+*.parquet
+
+# ==========================
+# OS Files
+# ==========================
+.DS_Store
+Thumbs.db
+
+# ==========================
+# VSCode
+# ==========================
+.vscode/
+
+# ==========================
+# Pytest / Coverage
+# ==========================
+.coverage
+htmlcov/
+
+# ==========================
+# Build
+# ==========================
+build/
+dist/
+*.egg-info/
+
+# ==========================
+# Docker
+# ==========================
+*.tar

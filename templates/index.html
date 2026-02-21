@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Auto Residual Value Predictor</title>
+    <link rel="stylesheet" href="/static/style.css?v={{ build_id }}">
+</head>
+<body>
+
+<div class="container">
+    <h1>🚗 Auto Residual Value Predictor</h1>
+    <p class="subtitle">AI-powered used vehicle valuation</p>
+
+    <form id="predictForm">
+        <div class="form-grid">
+
+            <div class="form-group">
+                <label>Segment</label>
+                <select id="segment">
+                    <option value="suv">SUV</option>
+                    <option value="sedan">Sedan</option>
+                    <option value="truck">Truck</option>
+                    <option value="luxury">Luxury</option>
+                    <option value="ev">EV</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Vehicle Age (years)</label>
+                <input type="number" id="vehicle_age" required>
+            </div>
+
+            <div class="form-group">
+                <label>Odometer (miles)</label>
+                <input type="number" id="odometer" required>
+            </div>
+
+            <div class="form-group">
+                <label>Price Per Mile ($)</label>
+                <input type="number" step="0.01" id="price_per_mile" required>
+            </div>
+
+        </div>
+
+        <button type="submit" class="btn">Predict Value</button>
+    </form>
+
+    <div class="result-card" id="resultCard" style="display:none;">
+        <h3>Predicted Residual Value</h3>
+        <p id="predictionValue"></p>
+    </div>
+
+</div>
+
+<script>
+document.getElementById("predictForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const response = await fetch("/predict", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            segment: document.getElementById("segment").value,
+            vehicle_age: parseFloat(document.getElementById("vehicle_age").value),
+            odometer: parseFloat(document.getElementById("odometer").value),
+            price_per_mile: parseFloat(document.getElementById("price_per_mile").value)
+        })
+    });
+
+    const data = await response.json();
+
+    const resultCard = document.getElementById("resultCard");
+    const predictionValue = document.getElementById("predictionValue");
+
+    predictionValue.innerText = (data.predicted_residual_value_pct * 100).toFixed(2) + "%";
+    resultCard.style.display = "block";
+});
+</script>
+
+</body>
+</html>
