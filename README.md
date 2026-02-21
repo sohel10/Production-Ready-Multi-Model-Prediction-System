@@ -36,7 +36,20 @@ This architecture reflects how **real-world valuation systems** are deployed in 
 [![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-CI/CD-2088FF)](https://github.com/features/actions)
 [![Ubuntu](https://img.shields.io/badge/OS-Ubuntu-FCC624)](https://ubuntu.com/)
 [![Parquet](https://img.shields.io/badge/Storage-Parquet-4B8BBE)](https://parquet.apache.org/)
+[![Python Version](https://img.shields.io/badge/python-3.10+-blue.svg)]()
+[![Built with](https://img.shields.io/badge/Built%20with-XGBoost%20%7C%20FastAPI%20%7C%20Docker-brightgreen)]()
+[![Architecture](https://img.shields.io/badge/Architecture-Segment--Aware-blue)]()
+[![Deployment](https://img.shields.io/badge/Deployment-Dockerized-success)]()
+[![Status](https://img.shields.io/badge/status-production--style-success)]()
 
+---
+
+
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+![Python Version](https://img.shields.io/badge/python-3.10+-blue.svg)
+![Built with](https://img.shields.io/badge/Built%20with-Apache%20Spark%20%7C%20PyTorch%20%7C%20FAISS-brightgreen)
+![Architecture](https://img.shields.io/badge/Architecture-Retrieval--First-blue)
+![Status](https://img.shields.io/badge/status-production--style-success)
 ## Business Objective
 
 Predict **Residual Value Percentage (RV%)** of used vehicles using:
@@ -146,20 +159,7 @@ auto-valuation/
 # 🚗 Auto Residual Value Predictor  
 ### Production-Grade Multi-Segment Vehicle Valuation System
 
-[![Python Version](https://img.shields.io/badge/python-3.10+-blue.svg)]()
-[![Built with](https://img.shields.io/badge/Built%20with-XGBoost%20%7C%20FastAPI%20%7C%20Docker-brightgreen)]()
-[![Architecture](https://img.shields.io/badge/Architecture-Segment--Aware-blue)]()
-[![Deployment](https://img.shields.io/badge/Deployment-Dockerized-success)]()
-[![Status](https://img.shields.io/badge/status-production--style-success)]()
 
----
-
-
-[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-![Python Version](https://img.shields.io/badge/python-3.10+-blue.svg)
-![Built with](https://img.shields.io/badge/Built%20with-Apache%20Spark%20%7C%20PyTorch%20%7C%20FAISS-brightgreen)
-![Architecture](https://img.shields.io/badge/Architecture-Retrieval--First-blue)
-![Status](https://img.shields.io/badge/status-production--style-success)
 ## 🚀 What This System Demonstrates
 
 - Multi-segment ML modeling (SUV, Sedan, Truck, Luxury, EV)
