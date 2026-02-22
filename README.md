@@ -332,3 +332,21 @@ The FastAPI service can be launched locally or deployed in a containerized envir
 uvicorn app.main:app --reload
 
 uvicorn app.main:app --reload
+
+
+# 404925354687.dkr.ecr.us-east-1.amazonaws.com/vehicle
+
+
+sudo apt-get update -y
+
+sudo apt-get upgrade
+
+#required
+
+curl -fsSL https://get.docker.com -o get-docker.sh
+
+sudo sh get-docker.sh
+
+sudo usermod -aG docker ubuntu
+
+newgrp docker

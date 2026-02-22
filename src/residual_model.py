@@ -127,6 +127,7 @@ def train_segment_model(segment_df, segment_name):
 )
 
     model.fit(X_train, y_train)
+    
 
     preds = model.predict(X_test)
     rmse = np.sqrt(mean_squared_error(y_test, preds))
